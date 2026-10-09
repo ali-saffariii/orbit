@@ -1,0 +1,20 @@
+{
+  "id": "./",
+  "name": "ORBIT — مدیریت مالی شخصی",
+  "short_name": "ORBIT",
+  "description": "مدیریت شخصی درآمد، خرج، بودجه، قسط و بدهی با تقویم شمسی",
+  "lang": "fa",
+  "dir": "rtl",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#e8e8e4",
+  "theme_color": "#e8e8e4",
+  "categories": ["finance", "productivity"],
+  "icons": [
+    {"src":"./icons/icon-192.png","sizes":"192x192","type":"image/png","purpose":"any"},
+    {"src":"./icons/icon-512.png","sizes":"512x512","type":"image/png","purpose":"any"},
+    {"src":"./icons/icon-maskable-512.png","sizes":"512x512","type":"image/png","purpose":"maskable"}
+  ]
+}
