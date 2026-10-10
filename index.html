@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#e8e8e4">
+  <meta name="color-scheme" content="light dark">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="ORBIT">
+  <meta name="application-name" content="ORBIT">
+  <meta name="description" content="مدیریت شخصی درآمد، خرج، بودجه، قسط و بدهی با تقویم شمسی">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
+  <link rel="icon" type="image/svg+xml" href="./icons/icon.svg">
+  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
+  <title>ORBIT — مدیریت مالی شخصی</title>
+  <script>
+    /* تم ذخیره‌شده را پیش از رسم صفحه اعمال می‌کند تا چشمک نزند. */
+    (function () {
+      try {
+        var saved = JSON.parse(localStorage.getItem('orbit_finance_v3') || 'null');
+        var theme = saved && saved.settings && saved.settings.theme;
+        if (theme !== 'dark' && theme !== 'light') theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', theme);
+        var meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.content = theme === 'dark' ? '#151515' : '#e8e8e4';
+      } catch (error) { /* ignore */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="./styles.css?v=3.1.0">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">ORBIT<small>مدیریت مالی شخصی</small></div>
+      <nav class="desktop-nav" id="desktopNav" aria-label="منوی اصلی"></nav>
+      <div class="sidebar-actions">
+        <button class="button" type="button" data-action="theme">تغییر تم</button>
+        <button class="button primary" type="button" data-action="new-transaction" data-kind="expense">ثبت سریع</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div class="month-switcher">
+          <button class="icon-button" type="button" data-action="previous-month" aria-label="ماه قبل"><span class="chevron previous"></span></button>
+          <strong id="monthLabel"></strong>
+          <button class="icon-button" type="button" data-action="next-month" aria-label="ماه بعد"><span class="chevron next"></span></button>
+        </div>
+        <div class="top-actions">
+          <button class="button" type="button" data-action="current-month">امروز</button>
+          <button class="icon-button" id="themeToggle" type="button" data-action="theme" aria-label="تغییر حالت روشن و تاریک"></button>
+          <button class="button primary desktop-only" type="button" data-action="new-transaction" data-kind="expense">ثبت سریع</button>
+        </div>
+      </header>
+
+      <div class="content">
+        <div id="storageWarning" class="warning" role="alert" hidden></div>
+        <section id="screen"></section>
+      </div>
+    </main>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav" aria-label="منوی اصلی"></nav>
+  <button class="floating-button" type="button" data-action="new-transaction" data-kind="expense" aria-label="ثبت سریع"></button>
+  <div class="modal" id="modal" aria-hidden="true"><div class="modal-box" id="modalBox" role="dialog" aria-modal="true"></div></div>
+  <div class="modal confirm" id="confirmModal" aria-hidden="true"><div class="confirm-box" id="confirmBox" role="alertdialog" aria-modal="true" aria-labelledby="confirmTitle"></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <noscript><div class="fatal">برای استفاده از ORBIT باید JavaScript مرورگر فعال باشد.</div></noscript>
+  <script src="./app.js?v=3.1.0" defer></script>
+</body>
+</html>
